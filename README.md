@@ -1,0 +1,2 @@
+# ME303-Advanced-Engineering-Mathematics
+A continuation of ME 201 and ME 203 in which both classical calculus techniques and the computer implementation of numerical methods are discussed. Partial differential equations of mathematical physics: wave, diffusion, Laplace, Poisson equations. Boundary and initial conditions. Separation of variables. Numerical methods for ordinary and partial differential equations. Applications will emphasize the role of ordinary and partial differential equations in understanding the behaviour of physical systems. 
