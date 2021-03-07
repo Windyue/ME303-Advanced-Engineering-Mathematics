@@ -46,6 +46,19 @@ for c = 1 :i
     
 end
 
+% Errors
+Euler_Error = R_Euler_Vals - y(t);
+RK2_Error = R_RK2_Vals - y(t);
+RK4_Error = R_RK4_Vals - y(t);
+
+Euler_Max_Error = max(abs(Euler_Error));
+RK2_Max_Error = max(abs(RK2_Error));
+RK4_Max_Error = max(abs(RK4_Error));
+
+script = '\n Maximum Error: Euler = %d, RK2 = %d, RK4 = %d';
+
+fprintf(script, Euler_Max_Error, RK2_Max_Error, RK4_Max_Error);
+
 plot(t, y(t), t, R_Euler_Vals, t, R_RK2_Vals, t, R_RK4_Vals);
 legend('Analytical', 'Euler', 'RK2', 'RK4')
 grid on;
