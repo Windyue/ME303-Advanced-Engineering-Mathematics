@@ -13,17 +13,19 @@ R_cur = 100;
 V_cur = 0;
 
 i= 50000;
-dt = 1e-9;
-t = linspace(0,dt*i,i+1);
-
+dt = 1e-4;
+t = linspace(0,i*dt,i+1);
 
 R = [] * i+1;
+V = [] * i+1;
 
 for c = 1 :i+1
+
     [R_cur, V_cur] = RK4_rayleigh_plesset(R_cur, V_cur, rho, sigma, mu, P_o, dt);
     fprintf('\n c=%d, R_cur=%d, V_cur=%d' , c, R_cur ,V_cur); 
     R(c) = R_cur;
-    
+    V(c) = V_cur;
+
 end
 
 plot(t,R);

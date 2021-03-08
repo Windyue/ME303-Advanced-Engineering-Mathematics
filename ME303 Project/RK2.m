@@ -33,7 +33,7 @@ V_slope=@(R)(lambda_sqrd * (R_o - R) - 1.5 * (P_o / (rho*R_o)));
 % Foward Eulers
 R1_slope = V_cur;
 R1 = R_cur + dt * R1_slope;
-V1_slope =  V_slope(R_curr);
+V1_slope =  V_slope(R_cur);
 V1 = V_cur + dt * V1_slope;
 
 % Calculate Slope using Implicit Method

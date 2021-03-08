@@ -5,7 +5,7 @@ function [R_fwd, V_fwd] = RK4_rayleigh_plesset(R_cur, V_cur, rho, sigma, mu, P_o
 % (1): R_i+1 = Ri + Δt * R_i'
 % (2): V_i+1 = Vi + Δt * V_i'
 
-V_slope=@(R, V)((  -P_o - ((4*mu*V)/R) - ((2*sigma)/R) - (1.5*V*V*rho) ) / (R*rho));
+V_slope=@(R, V)(( -P_o - ((4*mu*V)/R) - ((2*sigma)/R) - (1.5*V*V*rho) ) / (R*rho));
 
 % R at t_i+1/2 using i values
 R1 = R_cur + (dt) * V_cur;
@@ -37,6 +37,10 @@ V_slope = (1/6) *((V1_slope+V4_slope) + 2*(V2_slope+V3_slope));
 % RK4
 R_fwd = R_cur + dt * R_slope;
 V_fwd = V_cur + dt * V_slope;
+
+if R_fwd < 6
+    V_fwd = -V_fwd;
+end
 
 end
 
