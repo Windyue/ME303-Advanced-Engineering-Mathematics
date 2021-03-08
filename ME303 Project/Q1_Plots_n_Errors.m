@@ -9,7 +9,7 @@ R_o = 0.002;
 P_o = 100981;
 T_star = pi / sqrt(lambda_sqrd);
 
-i= 1000;
+i= 100000;
 t = linspace(0,T_star,i);
 dt = T_star/i;
 

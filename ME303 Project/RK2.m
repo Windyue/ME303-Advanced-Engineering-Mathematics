@@ -28,16 +28,17 @@ V_i+1 = Vi + Δt * 0.5(V_i' + V_i+1')
 
 %}
 
+V_slope=@(R)(lambda_sqrd * (R_o - R) - 1.5 * (P_o / (rho*R_o)));
 
 % Foward Eulers
 R1_slope = V_cur;
 R1 = R_cur + dt * R1_slope;
-V1_slope =  (lambda_sqrd * (R_o - R_cur) - 1.5 * (P_o / (rho*R_o)));
+V1_slope =  V_slope(R_curr);
 V1 = V_cur + dt * V1_slope;
 
 % Calculate Slope using Implicit Method
 R2_slope = V1;
-V2_slope = (lambda_sqrd * (R_o - R1) - 1.5 * (P_o / (rho*R_o)));
+V2_slope =V_slope(R1);
 
 % Modified Slopes
 R_prime = 0.5 * (R1_slope + R2_slope);
