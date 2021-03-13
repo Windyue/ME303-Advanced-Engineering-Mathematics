@@ -17,13 +17,13 @@ R = [] * i;
 
 
 for c = 1:i
-    [R_cur, V_cur] = KK_EOM_RK4(R_cur, V_cur, Reversal, speed, dt);
+    [R_cur, V_cur] = Herring_EOM_RK4(R_cur, V_cur, Reversal, speed, dt);
     %fprintf('\n c=%d, R_cur=%d, V_cur=%d' , c, R_cur ,V_cur); 
     R(c) = R_cur;
     
 end
 
-ttl = sprintf('Keller-Kolodner-EOM Equation, R_o = %.0d, ΔT= %.0d', 100, dt);
+ttl = sprintf('Herring-EOM Equation, R_o = %.0d, ΔT= %.0d', 100, dt);
 plot(t,R);
 grid on;
 xlabel('t(s)');

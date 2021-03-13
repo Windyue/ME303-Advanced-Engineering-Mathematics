@@ -23,7 +23,9 @@ for c = 1:i
     
 end
 
+ttl = sprintf('Lamb-EOM Equation, R_o = %.0d, ΔT= %.0d', 100, dt);
 plot(t,R);
 grid on;
-xlabel('t');
-ylabel('R');
+xlabel('t(s)');
+ylabel('R(m)');
+title(ttl);

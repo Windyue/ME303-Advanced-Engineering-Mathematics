@@ -1,6 +1,6 @@
-function [R_next, V_next] = KK_EOM_RK4(R_cur, V_cur, Reversal, speed, dt)
+function [R_next, V_next] = Herring_EOM_RK4(R_cur, V_cur, Reversal, speed, dt)
 
-w_i=@(R, R_slope)( -( ((9710003*0.001)*(1+R_slope/speed))- (1.5*(R_slope*R_slope)*(1-(R_slope/(3*speed)))) ) / (R*(1-(R_slope/speed))));
+w_i=@(R, R_slope)( -((9710003*0.001)-(1.5*(R_slope*R_slope)*(1-(4*R_slope/(3*speed)))) ) / (R*(1-(2*R_slope)/speed)));
 
 %Estimate r at t_i+1 using R_slope at t_i
 R1 = R_cur + (dt)* V_cur; %y*
