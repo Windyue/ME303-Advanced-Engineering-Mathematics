@@ -4,7 +4,6 @@ import random
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D  
 from matplotlib.ticker import LinearLocator
-from tqdm.notebook import tqdm
 
 
 class Bread:
@@ -14,7 +13,7 @@ class Bread:
     The following class are methods used
     to model the 2-D Heating PDE about its x and y dimension.
 
-    T(x,y,t) - Temperature given radius and time, x <= 1, y <= 1 and t>=0 
+    T(x,y,t) - Temperature given x,y, time where x <= 1, y <= 1 and t>=0 
 
     PDE: dT/dt = α (d^2T/ dx^2 + d^2T/ dy^2)
 
@@ -48,8 +47,7 @@ class Bread:
         
         x_ = np.linspace(0, self.X, round(self.X/dx)+1)
         y_ = np.linspace(0, self.Y, round(self.Y/dy)+1)
-        X_, Y_ = np.meshgrid(x_ , y_);
-        print(len(y_))
+        X_, Y_ = np.meshgrid(x_ , y_)
         
         # Multiply
         T_cur = np.sin(np.pi*X_) * np.sin(4*np.pi*Y_)
@@ -87,7 +85,8 @@ class Bread:
                 
                 print("Saving Plot Image at Checkpoint: {} s".format(t* dt))
                 self.save_plot(X_, Y_, T_cur, t)
-                
+
+        printf("Time Elapsed: {} s".format(self.cool_time))       
     
     def save_plot(self, X_, Y_, T_cur, t):
         
@@ -99,7 +98,7 @@ class Bread:
         ax.set_xlabel('x'); 
         ax.set_ylabel('y');
         ax.set_zticklabels([])
-        ax.view_init(azim=90, elev=90)         
+        ax.view_init(azim=270, elev=90)         
         ax.set_title(" Heat Distribution of {} during T = {:.4f}s".format(self.name, t*self.dt))
         file_name = 'imgs/bread_1/{}_{}_heat_plot.jpg'.format(self.name.replace(" ", "_"), str(t))
         plt.savefig(file_name, dpi=200)

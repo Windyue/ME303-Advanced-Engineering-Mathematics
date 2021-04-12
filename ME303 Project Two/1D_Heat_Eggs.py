@@ -135,7 +135,7 @@ class Egg:
 def main():
 
     chicken = Egg(radius=0.0254, density=875, name="Chicken Egg")
-    chicken.solve(dt=0.1 , dr=0.00254)
+    chicken.solve(dt=0.01 , dr=0.00254)
     chicken.plot()
 
     quail = Egg(radius=0.0127, density=1170, name="Quail Egg")
