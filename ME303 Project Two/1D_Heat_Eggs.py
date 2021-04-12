@@ -22,7 +22,7 @@ class Egg:
                  radius,
                  density,
                  name,
-                 K=2.54,
+                 K=0.54,
                  Cp=3320,
                  ):
         
@@ -142,7 +142,7 @@ def main():
     quail.solve(dt=0.01 , dr=0.00127)
     quail.plot()
 
-    ostritch = Egg(radius=0.0762, density=730, name="Ostritch Egg")
+    ostritch = Egg(radius=0.0762, density=730, name="Ostrich Egg")
     ostritch.solve(dt=0.01 , dr=0.00762)
     ostritch.plot()
 

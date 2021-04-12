@@ -19,26 +19,23 @@ T(x,y=0,t) = 0 = T{i,0}
 clear all
 clc
 
-x = linspace(0,1,30);
-y = linspace(0,1,30);
+dx = 0.1;
+dy = 0.1;
+x = linspace(0,1, round(1/dx)+1);
+y = linspace(0,1,round(1/dy)+1);
 [X,Y] = meshgrid(x,y);
 
 % change in x and y
-dx = x(2) - x(1);
-dy = y(2) - y(1);
-dt = 0.0002;
+dt = 0.002;
 
 % dirichlet boundary
-T_old = sin(5*pi*X) .* cos(4*pi*Y); % Matrix multiply
-B1 = sin(pi*y);
-B2 = 0;
-B3 = 0;
-B4 = sin(pi*y);
+T_old = sin(pi*X) .* sin(4*pi*Y); % Matrix multiply
+
 % Index like T_old(y,x)
-T_old(:,1) = B1; % T(x=0,y,t) = sin(πy) = T{0,j}
-T_old(1,:) = B2; % T(x,y=1,t) = 0 = T{i,1}
-T_old(end,:) = B3; % T(x,y=1,t) = 0 = T{i,1}
-T_old(:,end) = B4;  % T(x=1,y,t) = sin(πy) = T{30,j}
+T_old(:,1) = 0; % T(x=0,y,t) = sin(πy) = T{0,j}
+T_old(1,:) = sin(pi*x); % T(x,y=1,t) = 0 = T{i,1}
+T_old(end,:) =  cos(2*pi*x)-1; % T(x,y=1,t) = 0 = T{i,1}
+T_old(:,end) = 0;  % T(x=1,y,t) = sin(πy) = T{30,j}
 
 surf(x,y,T_old);
 view(2)
@@ -49,18 +46,18 @@ ylabel('Y');
 title('time=0 s');
 
 T_new = ones(size(T_old));
-T_new(:,1) = B1; % T(x=0,y,t) = sin(πy) = T{0,j}
-T_new(1,:) = B2; % T(x,y=1,t) = 0 = T{i,1}
-T_new(end,:) = B3; % T(x,y=1,t) = 0 = T{i,1}
-T_new(:,end) = B4;  % T(x=1,y,t) = sin(πy) = T{30,j}
+T_new(:,1) = 0; % T(x=0,y,t) = sin(πy) = T{0,j}
+T_new(1,:) = sin(pi*x); % T(x,y=1,t) = 0 = T{i,1}
+T_new(end,:) =  cos(2*pi*x)-1; % T(x,y=1,t) = 0 = T{i,1}
+T_new(:,end) = 0;  % T(x=1,y,t) = sin(πy) = T{30,j}
 
 k=1;
 for t = 1:1000
     for i = 2: length(x)-1
         for j = 2: length(y)-1
             
-            a =  ( T_old(i, j+1) - 2*T_old(i, j) + T_old(i, j-1) ) / dx^2;
-            b =  ( T_old(i+1, j) - 2*T_old(i, j) + T_old(i-1,j) ) / dy^2;
+            a =  ( T_old(i, j+1) - 2*T_old(i, j) + T_old(i, j-1) ) / dy^2;
+            b =  ( T_old(i+1, j) - 2*T_old(i, j) + T_old(i-1,j) ) / dx^2;
             T_new(i,j) = (dt*(a +b ) ) + T_old(i, j);
         end
     end
@@ -68,7 +65,7 @@ for t = 1:1000
     
 
     
-    surf(x,y,T_old);
+    surf(X,Y,T_old);
     view(2)
     a = sprintf('time=%f s', t*dt);
     title(a);  
@@ -79,7 +76,8 @@ for t = 1:1000
     ylabel('Y');
     axis('equal');
     pause(0.0000001);
-
+    
+ 
     
 end       
 
